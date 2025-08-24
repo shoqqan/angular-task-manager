@@ -1,0 +1,34 @@
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+  <tui-textfield iconStart="@tui.tuiIconUser">
+    <label tuiLabel>Username</label>
+    <textarea placeholder="@shoqqan" tuiTextfield formControlName="name"></textarea>
+  </tui-textfield>
+  <div *ngIf="authForm.get('name')?.invalid && authForm.get('name')?.touched" class="error">
+    <span *ngIf="authForm.get('name')?.errors?.['required']">Username обязателен</span>
+    <span *ngIf="authForm.get('name')?.errors?.['minlength']"
+      >Username должен содержать минимум 3 символа</span
+    >
+  </div>
+  <tui-textfield>
+    <label tuiLabel>Password</label>
+    <textarea
+      placeholder="********"
+      tuiTextfield
+      formControlName="password"
+      type="password"
+    ></textarea>
+  </tui-textfield>
+
+  <tui-textfield *ngIf="type() === 'register'">
+    <label tuiLabel>Confirm Password</label>
+    <textarea
+      placeholder="********"
+      tuiTextfield
+      formControlName="secondPassword"
+      type="password"
+    ></textarea>
+  </tui-textfield>
+  <button type="submit" [disabled]="authForm.invalid">
+    {{ type() === 'login' ? 'Login' : 'Register' }}
+  </button>
+</form>
