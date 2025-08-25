@@ -12,29 +12,23 @@ export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
   private userService = inject(UserService);
-  public login(name: string, password: string): Observable<User> {
+  public login(name: string, password: string): Observable<{ access_token: string }> {
     return this.http
-      .post<User>(`${this.apiUrl}/auth/login`, {
+      .post<{ access_token: string }>(`${this.apiUrl}/auth/login`, {
         name,
         password,
       })
       .pipe(
-        tap((user) => {
-          this.userService.user.set(user);
+        tap(({ access_token }) => {
+          localStorage.setItem('token', access_token);
         }),
       );
   }
 
-  public register(name: string, password: string): Observable<User> {
-    return this.http
-      .post<User>(`${this.apiUrl}/auth/register`, {
-        name,
-        password,
-      })
-      .pipe(
-        tap((user) => {
-          this.userService.user.set(user);
-        }),
-      );
+  public register(name: string, password: string) {
+    return this.http.post<User>(`${this.apiUrl}/auth/register`, {
+      name,
+      password,
+    });
   }
 }

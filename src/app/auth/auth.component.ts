@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { TuiTextfieldComponent, TuiLabel } from '@taiga-ui/core';
+import { TuiLabel, TuiButton, TuiTitle, TuiTextfield } from '@taiga-ui/core';
 import { AuthService } from './auth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,7 +9,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [TuiTextfieldComponent, TuiLabel, ReactiveFormsModule, NgIf],
+  imports: [TuiTextfield, TuiLabel, ReactiveFormsModule, NgIf, TuiButton, TuiTitle],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
 })
@@ -33,8 +33,9 @@ export class AuthComponent {
       .login(name, password)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (user) => {
-          console.log('Успешный логин:', user);
+        next: ({ access_token }) => {
+          console.log('Успешный логин:', access_token);
+
           this.router.navigate(['/']);
         },
         error: (error) => {

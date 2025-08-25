@@ -1,7 +1,8 @@
-<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-  <tui-textfield iconStart="@tui.tuiIconUser">
+<form class="form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+  <h3 tuiTitle="l">{{ type() === 'login' ? 'Login' : 'Register' }}</h3>
+  <tui-textfield iconStart="@tui.user" class="form-item">
     <label tuiLabel>Username</label>
-    <textarea placeholder="@shoqqan" tuiTextfield formControlName="name"></textarea>
+    <input placeholder="@shoqqan" tuiTextfield formControlName="name" />
   </tui-textfield>
   <div *ngIf="authForm.get('name')?.invalid && authForm.get('name')?.touched" class="error">
     <span *ngIf="authForm.get('name')?.errors?.['required']">Username обязателен</span>
@@ -9,26 +10,16 @@
       >Username должен содержать минимум 3 символа</span
     >
   </div>
-  <tui-textfield>
+  <tui-textfield iconStart="@tui.lock" class="form-item">
     <label tuiLabel>Password</label>
-    <textarea
-      placeholder="********"
-      tuiTextfield
-      formControlName="password"
-      type="password"
-    ></textarea>
+    <input placeholder="********" tuiTextfield formControlName="password" type="password" />
   </tui-textfield>
 
-  <tui-textfield *ngIf="type() === 'register'">
+  <tui-textfield *ngIf="type() === 'register'" iconStart="@tui.lock-keyhole" class="form-item">
     <label tuiLabel>Confirm Password</label>
-    <textarea
-      placeholder="********"
-      tuiTextfield
-      formControlName="secondPassword"
-      type="password"
-    ></textarea>
+    <input placeholder="********" tuiTextfield formControlName="secondPassword" type="password" />
   </tui-textfield>
-  <button type="submit" [disabled]="authForm.invalid">
+  <button tuiButton appearance="primary" type="submit" [disabled]="authForm.invalid">
     {{ type() === 'login' ? 'Login' : 'Register' }}
   </button>
 </form>
