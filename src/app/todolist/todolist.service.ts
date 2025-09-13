@@ -11,7 +11,7 @@ export class TodolistService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
   public getTodos(): Observable<Todolist[]> {
-    return this.http.get<Todolist[]>(`${this.apiUrl}/todolists`);
+    return this.http.get<Todolist[]>(`${this.apiUrl}/todolists`).pipe();
   }
 
   public createTodo(title: string) {

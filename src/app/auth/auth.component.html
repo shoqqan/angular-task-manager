@@ -19,7 +19,13 @@
     <label tuiLabel>Confirm Password</label>
     <input placeholder="********" tuiTextfield formControlName="secondPassword" type="password" />
   </tui-textfield>
-  <button tuiButton appearance="primary" type="submit" [disabled]="authForm.invalid">
+  <button
+    tuiButton
+    appearance="primary"
+    type="submit"
+    [loading]="isLoading()"
+    [disabled]="authForm.invalid"
+  >
     {{ type() === 'login' ? 'Login' : 'Register' }}
   </button>
 </form>

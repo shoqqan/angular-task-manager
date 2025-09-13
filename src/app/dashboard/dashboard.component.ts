@@ -12,14 +12,7 @@ import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    TuiAppBar,
-    TuiButton,
-    TuiTextfield,
-    ReactiveFormsModule,
-    TodolistComponent,
-    NgFor,
-  ],
+  imports: [TuiAppBar, TuiButton, TuiTextfield, ReactiveFormsModule, TodolistComponent, NgFor],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
