@@ -10,8 +10,11 @@ import { Observable } from 'rxjs/internal/Observable';
 export class TodolistService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
-
   public getTodos(): Observable<Todolist[]> {
-    return this.http.get<Todolist[]>(`${this.apiUrl}/todos`);
+    return this.http.get<Todolist[]>(`${this.apiUrl}/todolists`);
+  }
+
+  public createTodo(title: string) {
+    return this.http.post<Todolist>(`${this.apiUrl}/todolists`, { title });
   }
 }

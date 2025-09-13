@@ -3,7 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { User } from '../user/user.interface';
 import { environment } from '../../environments/environment';
-import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,6 @@ import { UserService } from '../user/user.service';
 export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
-  private userService = inject(UserService);
   public login(name: string, password: string): Observable<{ access_token: string }> {
     return this.http
       .post<{ access_token: string }>(`${this.apiUrl}/auth/login`, {
@@ -30,5 +28,13 @@ export class AuthService {
       name,
       password,
     });
+  }
+
+  public logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  public isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 }

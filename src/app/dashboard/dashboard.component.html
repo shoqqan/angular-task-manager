@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<main class="dashboard">
+  <tui-app-bar class="app-bar">
+    <button
+      iconStart="@tui.x"
+      title="Settings"
+      tuiIconButton
+      tuiSlot="left"
+      type="button"
+      (click)="logout()"
+    ></button>
+    <tui-textfield>
+      <label tuiLabel>Create Todo</label>
+      <input
+        id="createTodoValue"
+        placeholder="Write code"
+        tuiTextfield
+        [formControl]="createTodoValue"
+        (keydown)="onEnterKeyPress($event)"
+      />
+    </tui-textfield>
+
+    <a iconStart="@tui.user" title="User" tuiIconButton tuiSlot="right"></a>
+    <button
+      iconStart="@tui.settings"
+      title="Settings"
+      tuiIconButton
+      tuiSlot="right"
+      type="button"
+    ></button>
+  </tui-app-bar>
+  <app-todolist *ngFor="let todo of todos()" [todo]="todo"></app-todolist>
+</main>
