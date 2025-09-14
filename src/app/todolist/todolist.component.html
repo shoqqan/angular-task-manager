@@ -3,7 +3,14 @@
     <h1 tuiTitle>{{ todo.title }}</h1>
   </header>
 
-  <input type="text" placeholder="Add a new todo" />
-  <button>Add</button>
-  <ul></ul>
+  <tui-textfield>
+    <label tuiLabel>Enter tasks for todo</label>
+    <input placeholder="Homework" tuiTextfield [formControl]="taskValue" />
+    <tui-icon icon="@tui.plus" (click)="createTask()" />
+  </tui-textfield>
+  <ul>
+    <li *ngFor="let task of tasks()">
+      <app-tasks [task]="task"></app-tasks>
+    </li>
+  </ul>
 </div>

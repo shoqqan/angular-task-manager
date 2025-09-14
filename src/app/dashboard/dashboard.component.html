@@ -28,5 +28,7 @@
       type="button"
     ></button>
   </tui-app-bar>
-  <app-todolist *ngFor="let todo of todos()" [todo]="todo"></app-todolist>
+  <div class="todolists">
+    <app-todolist *ngFor="let todo of todos()" [todo]="todo"></app-todolist>
+  </div>
 </main>

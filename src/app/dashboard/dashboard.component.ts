@@ -37,7 +37,6 @@ export class DashboardComponent {
       .getTodos()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((todos) => {
-        console.log('todos', todos);
         this.todos.set(todos);
       });
   }
@@ -50,9 +49,7 @@ export class DashboardComponent {
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe({
             next: () => {
-              // Очищаем поле ввода
               this.createTodoValue.reset();
-              // Перезагружаем список todos после успешного создания
               this.getTodos();
             },
             error: (error) => {
